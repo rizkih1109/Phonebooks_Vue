@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 
 const store = useUsersStore()
 const router = useRouter()
-
 const name = ref('')
 const phone = ref('')
 

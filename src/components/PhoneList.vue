@@ -1,9 +1,12 @@
 <script setup>
 import PhoneCard from './PhoneCard.vue'
 import { useUsersStore } from '@/stores/users'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, defineProps, watch } from 'vue'
 import DeleteModal from './DeleteModal.vue'
 
+const props = defineProps({
+  keyword: String
+})
 const store = useUsersStore()
 const isModal = ref(false)
 const selectedUser = ref(null)
@@ -11,6 +14,16 @@ const selectedUser = ref(null)
 onMounted(() => {
   store.loadUser()
 })
+
+watch(
+  () => props.keyword,
+  (newKeyword) => {
+    if (newKeyword) {
+      store.keyword = newKeyword
+      store.loadUser()
+    }
+  }
+)
 
 const openModal = (user) => {
   selectedUser.value = user
