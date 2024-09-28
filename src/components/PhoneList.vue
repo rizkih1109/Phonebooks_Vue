@@ -1,40 +1,67 @@
 <script setup>
 import PhoneCard from './PhoneCard.vue'
 import { useUsersStore } from '@/stores/users'
-import { onMounted, ref, defineProps, watch } from 'vue'
+import { onMounted, ref, defineProps, watch, onBeforeUnmount } from 'vue'
 import DeleteModal from './DeleteModal.vue'
 
 const props = defineProps({
   keyword: String,
-  sort: String
+  sort: String,
+  page: Number
 })
 const store = useUsersStore()
 const isModal = ref(false)
 const selectedUser = ref(null)
+const loading = ref(false)
+// const newPage = ref(1)
+let realPage = store.page
+// const emit = defineEmits(['update:page'])
 
-const load = async (keyword = '', sort = 'asc') => {
-  await store.loadUser({ keyword, sort, page: 1 })
+console.log(realPage)
+
+// const load = async (keyword = '', sort = 'asc') => {
+//   if (!loading.value) {
+//     loading.value = true
+//     await store.loadUser({ keyword, sort, page: 1 })
+//     loading.value = false
+//   }
+// }
+
+const handleScroll = () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement
+  if (scrollTop + clientHeight >= scrollHeight - 1) {
+    store.nextPage()
+    store.loadUser()
+  }
 }
 
 onMounted(() => {
-  load()
+  if (!loading.value) {
+    loading.value = true
+    store.loadUser()
+    loading.value = false
+  }
+  window.addEventListener('scroll', handleScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 
 watch([() => props.keyword, () => props.sort], ([newKeyword, newSort]) => {
   if (newKeyword || newKeyword === '') {
     store.keyword = newKeyword
     store.sort = newSort
-    load(newKeyword, newSort)
+    store.page = 1
+    store.loadUser()
   }
 })
 
 // watch(
-//   () => props.keyword,
-//   (newKeyword, newSort) => {
-//     if (newKeyword || newKeyword === '') {
-//       store.keyword = newKeyword
-//       load(newKeyword)
-//     }
+//   () => props.page,
+//   (newPage) => {
+//     store.page = newPage
+//     load(newPage)
 //   }
 // )
 

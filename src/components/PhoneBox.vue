@@ -9,7 +9,7 @@ const sort = ref('asc')
 
 <template>
   <div class="container">
-    <div>
+    <div class="barPosition">
       <PhoneBar v-model:keyword="keyword" v-model:sort="sort" />
     </div>
     <div class="cardList">

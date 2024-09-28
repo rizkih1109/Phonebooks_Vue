@@ -17,7 +17,6 @@ const search = () => {
 const sorting = () => {
   const newSort = sort.value === 'asc' ? 'desc' : 'asc'
   sort.value = newSort
-  console.log(newSort)
   emit('update:sort', newSort)
 }
 
@@ -26,12 +25,12 @@ library.add(faArrowDownZA, faUserPlus, faMagnifyingGlass)
 
 <template>
   <div class="topBar">
-    <button class="barBtn">
-      <font-awesome-icon :icon="['fas', 'arrow-down-z-a']" @click="sorting" />
+    <button class="barBtn" @click="sorting">
+      <font-awesome-icon :icon="['fas', 'arrow-down-z-a']" />
     </button>
     <!-- <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="search-icon" /> -->
     <input type="text" v-model="newKeyword" @input="search" />
-    <button class="barBtn" @click="() => router.push({ path: '/' })">
+    <button class="barBtn" @click="() => router.push({ path: '/add' })">
       <font-awesome-icon :icon="['fas', 'user-plus']" />
     </button>
   </div>
