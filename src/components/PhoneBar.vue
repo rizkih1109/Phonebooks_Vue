@@ -6,11 +6,19 @@ import { defineEmits, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const emit = defineEmits(['update:keyword'])
+const emit = defineEmits(['update:keyword', 'update:sort'])
 const newKeyword = ref('')
+const sort = ref('asc')
 
 const search = () => {
   emit('update:keyword', newKeyword.value)
+}
+
+const sorting = () => {
+  const newSort = sort.value === 'asc' ? 'desc' : 'asc'
+  sort.value = newSort
+  console.log(newSort)
+  emit('update:sort', newSort)
 }
 
 library.add(faArrowDownZA, faUserPlus, faMagnifyingGlass)
@@ -19,10 +27,10 @@ library.add(faArrowDownZA, faUserPlus, faMagnifyingGlass)
 <template>
   <div class="topBar">
     <button class="barBtn">
-      <font-awesome-icon :icon="['fas', 'arrow-down-z-a']" />
+      <font-awesome-icon :icon="['fas', 'arrow-down-z-a']" @click="sorting" />
     </button>
     <!-- <font-awesome-icon :icon="['fas', 'magnifying-glass']" class="search-icon" /> -->
-    <input type="text" v-model="newKeyword" @input="search" placeholder="search" />
+    <input type="text" v-model="newKeyword" @input="search" />
     <button class="barBtn" @click="() => router.push({ path: '/' })">
       <font-awesome-icon :icon="['fas', 'user-plus']" />
     </button>

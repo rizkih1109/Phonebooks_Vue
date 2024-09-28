@@ -4,15 +4,16 @@ import PhoneBar from './PhoneBar.vue'
 import PhoneList from './PhoneList.vue'
 
 const keyword = ref('')
+const sort = ref('asc')
 </script>
 
 <template>
   <div class="container">
     <div>
-      <PhoneBar v-model:keyword="keyword" />
+      <PhoneBar v-model:keyword="keyword" v-model:sort="sort" />
     </div>
     <div class="cardList">
-      <PhoneList :keyword="keyword" />
+      <PhoneList :keyword="keyword" :sort="sort" />
     </div>
   </div>
 </template>
