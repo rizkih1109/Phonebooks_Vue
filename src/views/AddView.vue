@@ -1,9 +1,9 @@
 <script setup>
-import PhoneBox from '@/components/PhoneBox.vue'
+import AddPhone from '@/components/AddPhone.vue'
 </script>
 
 <template>
   <main>
-    <PhoneBox />
+    <AddPhone />
   </main>
 </template>

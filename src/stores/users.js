@@ -11,15 +11,26 @@ const request = axios.create({
 export const useUsersStore = defineStore('users', () => {
   const users = ref([])
   const limit = ref(25)
+  const keyword = ref('')
+  const sort = ref('asc')
+  const page = ref(1)
 
   async function loadUser() {
     try {
       const response = await request.get('phonebooks', {
         params: {
-          limit: limit.value
+          limit: limit.value,
+          keyword: keyword.value,
+          sort: sort.value,
+          page: page.value
         }
       })
-      users.value = response.data.Phonebooks
+      console.log(page.value)
+      if (page.value === 1) {
+        users.value = response.data.Phonebooks
+      } else {
+        users.value = [...users.value, ...response.data.Phonebooks]
+      }
     } catch (err) {
       console.log(err)
     }
@@ -30,7 +41,6 @@ export const useUsersStore = defineStore('users', () => {
       const id = uuid()
       users.value.unshift({ id, name, phone })
       const response = await request.post('phonebooks', { name, phone })
-      console.log(response.data)
       users.value = users.value.map((item) => {
         if (item.id === id) {
           return {
@@ -41,7 +51,6 @@ export const useUsersStore = defineStore('users', () => {
         }
         return item
       })
-      console.log('after', users.value)
     } catch (err) {
       console.log(err)
     }
@@ -91,5 +100,26 @@ export const useUsersStore = defineStore('users', () => {
     }
   }
 
-  return { users, limit, addUser, loadUser, deleteUser, editUser, editAvatar }
+  function nextPage() {
+    page.value++
+  }
+
+  function firstPage() {
+    page.value = 1
+  }
+
+  return {
+    users,
+    limit,
+    keyword,
+    page,
+    sort,
+    addUser,
+    loadUser,
+    deleteUser,
+    editUser,
+    editAvatar,
+    nextPage,
+    firstPage
+  }
 })

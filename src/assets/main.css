@@ -1,35 +1,222 @@
-@import './base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+.container {
+  margin: 15px;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.barBtn {
+  padding: 10px;
+  margin: 0px 10px;
+  background-color: #ad793e;
+  border: none;
+  border-radius: 2px;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.wrap-search {
+  width: 90%;
+  position: relative;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.afe {
+  width: 100%;
+  padding: 5px 10px 5px 20px;
+  display: inline-block;
+  border: 1px solid;
+  border-radius: 3px;
+}
+
+input {
+  width: 100%;
+  padding: 7px;
+  border: 1px solid;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.topBar {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  background-color: #c3c3c3;
+  width: 258px;
+  margin: 8px 8px;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+img {
+  border-radius: 50%;
+  width: 110px;
+  height: 110px;
+  margin: 5px;
+}
+
+.barPosition {
+  position: sticky;
+  top: 15px;
+  z-index: 10;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow-y: auto;
+}
+
+p {
+  margin: 10px 0px;
+}
+
+.listData {
+  margin-left: 8px;
+  margin-top: 13px;
+}
+
+.listBtn {
+  margin-top: 20px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
+.formCon {
+  width: 40%;
+  margin: auto;
+  padding-top: 30px;
+}
+
+input[id='name'],
+[id='phone'] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.addBtn {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+button.add {
+  background-color: #ad793e;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  width: 49%;
+  color: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+}
+
+.modal {
+  background-color: #ffffff;
+  border: 1px solid #bebebe;
+  border-radius: 5px;
+  position: relative;
+  height: 200px;
+  width: 420px;
+  margin-top: 30px;
+}
+
+.modal-header {
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  border-bottom: 2px solid #e9ecef;
+  padding: 15px 0px;
+}
+
+.modal-content {
+  margin: 35px 20px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px solid #e9ecef;
+  padding: 5px 10px;
+}
+
+.modal-close {
+  position: absolute;
+  right: 8px;
+  font-size: 24px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.modal-title {
+  margin: 0px 20px;
+  line-height: 1.5;
+}
+
+.modal-button-yes {
+  margin: 5px;
+  padding: 8px 20px;
+  background-color: #ad793e;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+.modal-button-no {
+  margin: 5px;
+  padding: 8px 23px;
+  background-color: #ad793e;
+  border: none;
+  color: white;
+  border-radius: 5px;
+}
+
+input[id='edit'] {
+  width: 90%;
+  padding: 5px;
+  margin-right: 5px;
+  margin-top: 7px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.saveBtn {
+  margin-top: 7px;
+}
+
+.fixSaveBtn {
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  font-size: 16px;
 }
