@@ -42,29 +42,7 @@ const handleImage = (e) => {
 </script>
 
 <template>
-  <div v-if="isEdit" class="card">
-    <div>
-      <img
-        :src="
-          user.avatar == null
-            ? '../../Defaultavatar.png'
-            : `http://localhost:3000/images/${user.avatar}`
-        "
-        alt="avatar_user"
-      />
-    </div>
-    <div class="listData">
-      <div>
-        <input id="edit" v-model="name" />
-        <input id="edit" v-model="phone" />
-      </div>
-      <div class="listBtn">
-        <font-awesome-icon class="btn" :icon="['fas', 'floppy-disk']" @click="edit" />
-      </div>
-    </div>
-  </div>
-
-  <div v-else class="card">
+  <div class="card">
     <div>
       <img
         :src="
@@ -77,7 +55,16 @@ const handleImage = (e) => {
       />
       <input type="file" style="display: none" ref="fileInputRef" @change="handleImage" />
     </div>
-    <div class="listData">
+    <div v-if="isEdit" class="listData">
+      <div>
+        <input id="edit" v-model="name" />
+        <input id="edit" v-model="phone" />
+      </div>
+      <div class="saveBtn">
+        <font-awesome-icon class="fixSaveBtn" :icon="['fas', 'floppy-disk']" @click="edit" />
+      </div>
+    </div>
+    <div v-else class="listData">
       <div>
         <p>{{ user.name }}</p>
         <p>{{ user.phone }}</p>

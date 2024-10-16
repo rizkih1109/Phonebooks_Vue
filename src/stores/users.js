@@ -25,7 +25,6 @@ export const useUsersStore = defineStore('users', () => {
           page: page.value
         }
       })
-      console.log(page.value)
       if (page.value === 1) {
         users.value = response.data.Phonebooks
       } else {

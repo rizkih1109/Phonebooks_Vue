@@ -2,7 +2,7 @@
   margin: 15px;
 }
 
-.barBtn {
+.topBar button {
   padding: 10px;
   margin: 0px 10px;
   background-color: #ad793e;
@@ -10,32 +10,26 @@
   border-radius: 2px;
 }
 
-.wrap-search {
-  width: 90%;
-  position: relative;
-}
-
-.search-icon {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-}
-
-.afe {
+.inputBar {
   width: 100%;
-  padding: 5px 10px 5px 20px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   border: 1px solid;
+  padding: 5px;
   border-radius: 3px;
+  background-color: white;
 }
 
-input {
-  width: 100%;
-  padding: 7px;
-  border: 1px solid;
-  border-radius: 3px;
-  font-size: 16px;
+.inputBar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.inputBar svg {
+  margin: 0px 5px;
+  font-size: 15px;
 }
 
 .topBar {
@@ -77,13 +71,13 @@ img {
   overflow-y: auto;
 }
 
-p {
-  margin: 10px 0px;
-}
-
 .listData {
   margin-left: 8px;
   margin-top: 13px;
+}
+
+.listData p {
+  margin: 10px 0px;
 }
 
 .listBtn {
@@ -100,8 +94,7 @@ p {
   padding-top: 30px;
 }
 
-input[id='name'],
-[id='phone'] {
+.formCon input {
   width: 100%;
   padding: 10px;
   margin: 5px 0px;
@@ -115,7 +108,7 @@ input[id='name'],
   justify-content: space-between;
 }
 
-button.add {
+.addBtn button {
   background-color: #ad793e;
   border: none;
   border-radius: 3px;
@@ -169,7 +162,7 @@ button.add {
   padding: 5px 10px;
 }
 
-.modal-close {
+.modal-header span {
   position: absolute;
   right: 8px;
   font-size: 24px;
@@ -178,23 +171,14 @@ button.add {
   margin-right: 10px;
 }
 
-.modal-title {
+.modal-header h4 {
   margin: 0px 20px;
   line-height: 1.5;
 }
 
-.modal-button-yes {
+.modal-footer button {
   margin: 5px;
   padding: 8px 20px;
-  background-color: #ad793e;
-  border: none;
-  color: white;
-  border-radius: 5px;
-}
-
-.modal-button-no {
-  margin: 5px;
-  padding: 8px 23px;
   background-color: #ad793e;
   border: none;
   color: white;
@@ -208,13 +192,15 @@ input[id='edit'] {
   margin-top: 7px;
   display: inline-block;
   box-sizing: border-box;
+  font-size: 15px;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .saveBtn {
   margin-top: 7px;
 }
 
-.fixSaveBtn {
+.saveBtn svg {
   background-color: transparent;
   border: none;
   padding: 0px;

@@ -1,48 +1,49 @@
 <script setup>
+import DeleteModal from './DeleteModal.vue'
 import PhoneCard from './PhoneCard.vue'
 import { useUsersStore } from '@/stores/users'
-import { onMounted, ref, watch, onBeforeUnmount } from 'vue'
-import DeleteModal from './DeleteModal.vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps({
   keyword: String,
-  sort: String,
-  page: Number
+  sort: String
 })
 const store = useUsersStore()
-const isModal = ref(false)
 const selectedUser = ref(null)
-const loading = ref(false)
+const isModal = ref(false)
 
-const handleScroll = () => {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement
-  if (scrollTop + clientHeight >= scrollHeight - 1) {
-    store.nextPage()
-    store.loadUser()
-  }
-}
+let isLoading = false
 
 onMounted(() => {
-  if (!loading.value) {
-    loading.value = true
-    store.loadUser().then(() => {
-      loading.value = false
-    })
-  }
+  store.loadUser()
   window.addEventListener('scroll', handleScroll, { passive: true })
 })
 
-onBeforeUnmount(() => {
+onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
+const handleScroll = () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement
+  if (scrollTop + clientHeight >= scrollHeight - 1 && !isLoading) {
+    isLoading = true
+    store.nextPage()
+    store.loadUser().then(() => {
+      isLoading = false
+    })
+  }
+}
+
 watch([() => props.keyword, () => props.sort], ([newKeyword, newSort]) => {
   if (newKeyword || newKeyword === '') {
+    isLoading = true
     store.keyword = newKeyword
     store.sort = newSort
     store.firstPage()
     store.users = []
-    store.loadUser()
+    store.loadUser().then(() => {
+      isLoading = false
+    })
   }
 })
 
